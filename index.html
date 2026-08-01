@@ -12,30 +12,58 @@
 <body>
 
   <div id="game-container">
-
+  
     <!-- Header -->
     <header id="game-header">
-      <button id="settings-btn">⚙️</button>
+    
+      <div class="left-section">
+        <button id="settings-btn">⚙️</button>
+    
+        <div id="game-info">
+          <span>Score: <strong id="score">0</strong></span>
+          <span>Level: <strong id="level">1</strong></span>
+        </div>
+      </div>
+    
     </header>
-
+  
     <!-- Target Shape -->
     <section id="target-area">
+      <h2>Target Shape</h2>
+  
       <canvas id="shapeCanvas"></canvas>
     </section>
-
+  
     <!-- Play Area -->
     <section id="play-area">
       <canvas id="gameCanvas"></canvas>
     </section>
-
-    <!-- Settings Menu -->
+  
+    <!-- Settings -->
     <div id="settings-menu" class="hidden">
-      <button id="home-btn">🏠 Home</button>
-      <button id="clue-btn">💡 Clue</button>
-      <button id="retry-btn">🔄 Retry</button>
-      <button id="share-btn">📤 Share</button>
+    
+      <button class="menu-btn" id="home-btn">
+        🏠
+        <span>Home</span>
+      </button>
+    
+      <button class="menu-btn" id="clue-btn">
+        💡
+        <span>Clue</span>
+      </button>
+    
+      <button class="menu-btn" id="retry-btn">
+        🔄
+        <span>Retry</span>
+      </button>
+    
+      <button class="menu-btn" id="share-btn">
+        📤
+        <span>Share</span>
+      </button>
+    
     </div>
-
+  
   </div>
 
   <script type="module" src="./js/main.js"></script>
