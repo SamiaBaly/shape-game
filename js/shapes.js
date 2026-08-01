@@ -2,34 +2,42 @@ export const SHAPES = [
   {
     id: "triangle",
     sides: 3,
+    level: 1,
   },
   {
     id: "square",
     sides: 4,
+    level: 1,
   },
   {
     id: "pentagon",
     sides: 5,
+    level: 1,
   },
   {
     id: "hexagon",
     sides: 6,
+    level: 2,
   },
   {
     id: "heptagon",
     sides: 7,
+    level: 2,
   },
   {
     id: "octagon",
     sides: 8,
+    level: 3,
   },
   {
     id: "nonagon",
     sides: 9,
+    level: 3,
   },
   {
     id: "decagon",
     sides: 10,
+    level: 3,
   },
 ];
 
@@ -70,20 +78,28 @@ export function generatePoints(
 
 
 
-export function getRandomShape() {
+export function getRandomShape(level = 1) {
+
+  const availableShapes =
+    SHAPES.filter(
+      shape => shape.level === level
+    );
+
 
   const randomIndex =
-    Math.floor(Math.random() * SHAPES.length);
+    Math.floor(
+      Math.random() * availableShapes.length
+    );
 
 
-  const shape = SHAPES[randomIndex];
+  const shape =
+    availableShapes[randomIndex];
 
 
   return {
 
     ...shape,
 
-    // gameCanvas coordinate
     points: generatePoints(
       shape.sides,
       1080,

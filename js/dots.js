@@ -26,28 +26,43 @@ export class Dot {
   }
 }
 
-export function generateDotGrid(width, height) {
+export function generateDotGrid(width, height, level = 1) {
+
   const dots = [];
 
-  const rows = 12;
-  const cols = 8;
 
-  const marginX = width * 0.18;
-  const marginY = height * 0.18;
+  const rows = 8 + level * 2;
+  const cols = 6 + level * 2;
 
-  const gapX = (width - marginX * 2) / (cols - 1);
-  const gapY = (height - marginY * 2) / (rows - 1);
+
+  const marginX = width * 0.12;
+  const marginY = height * 0.12;
+
+
+  const gapX =
+    (width - marginX * 2) / (cols - 1);
+
+
+  const gapY =
+    (height - marginY * 2) / (rows - 1);
+
 
   for (let row = 0; row < rows; row++) {
+
     for (let col = 0; col < cols; col++) {
+
       dots.push(
         new Dot(
           marginX + col * gapX,
           marginY + row * gapY
         )
       );
+
     }
+
   }
 
+
   return dots;
+
 }

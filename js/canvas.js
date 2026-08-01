@@ -26,7 +26,8 @@ export function initializeCanvas() {
     // New dots generate
     game.dots = generateDotGrid(
       gameCanvas.width,
-      gameCanvas.height
+      gameCanvas.height,
+      game.level
     );
 
 
@@ -56,7 +57,8 @@ export function initializeCanvas() {
   // Generate dots
   game.dots = generateDotGrid(
     gameCanvas.width,
-    gameCanvas.height
+    gameCanvas.height,
+    game.level
   );
 
 
@@ -112,6 +114,7 @@ export function initializeCanvas() {
           game.isClosed = true;
 
 
+          // আগে draw করো
           redraw(gameCtx);
 
 
@@ -120,6 +123,11 @@ export function initializeCanvas() {
 
           const completed =
             game.checkShapeComplete();
+
+
+          if (!completed) {
+            redraw(gameCtx);
+          }
 
 
           console.log(
@@ -137,11 +145,15 @@ export function initializeCanvas() {
 
 
 
-          if (completed) {
+          // if (completed) {
 
-            alert("Level Complete!");
+          //   alert("Level Complete!");
 
-          }
+          // }
+          console.log(
+            "Lines after close:",
+            game.lines
+          );
 
 
           return;
