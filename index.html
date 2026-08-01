@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shape Game</title>
+
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+
+  <div id="game-container">
+
+    <!-- Header -->
+    <header id="game-header">
+      <button id="settings-btn">⚙️</button>
+    </header>
+
+    <!-- Target Shape -->
+    <section id="target-area">
+      <canvas id="shapeCanvas"></canvas>
+    </section>
+
+    <!-- Play Area -->
+    <section id="play-area">
+      <canvas id="gameCanvas"></canvas>
+    </section>
+
+    <!-- Settings Menu -->
+    <div id="settings-menu" class="hidden">
+      <button id="home-btn">🏠 Home</button>
+      <button id="clue-btn">💡 Clue</button>
+      <button id="retry-btn">🔄 Retry</button>
+      <button id="share-btn">📤 Share</button>
+    </div>
+
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+
+</body>
+
+</html>
