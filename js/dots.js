@@ -29,8 +29,8 @@ export class Dot {
 export function generateDotGrid(width, height) {
   const dots = [];
 
-  const rows = 5;
-  const cols = 5;
+  const rows = 12;
+  const cols = 8;
 
   const marginX = width * 0.18;
   const marginY = height * 0.18;

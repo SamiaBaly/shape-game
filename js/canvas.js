@@ -20,6 +20,29 @@ export function initializeCanvas() {
   const shapeCtx = shapeCanvas.getContext("2d");
   const gameCtx = gameCanvas.getContext("2d");
 
+  game.onShapeComplete = () => {
+
+
+    // New dots generate
+    game.dots = generateDotGrid(
+      gameCanvas.width,
+      gameCanvas.height
+    );
+
+
+    // Update target shape
+    updateTargetShape(
+      shapeCtx,
+      shapeCanvas
+    );
+
+
+    // Draw new dots
+    redraw(gameCtx);
+
+
+  };
+
 
   // Draw target shape
   drawShape(
@@ -183,6 +206,24 @@ export function initializeCanvas() {
 
   });
 
+
+}
+function updateTargetShape(ctx, canvas) {
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  drawShape(
+    ctx,
+    canvas.width,
+    canvas.height,
+    game.currentShape.sides
+  );
 
 }
 

@@ -3,10 +3,9 @@ import { getRandomShape } from "./shapes.js";
 export const game = {
 
   score: 0,
+  onShapeComplete: null,
 
-  currentShape: {
-    sides: 3
-  },
+  currentShape: getRandomShape(),
 
   dots: [],
   selectedDots: [],
@@ -23,11 +22,16 @@ export const game = {
 
 
     if (
-      this.selectedDots.length === this.currentShape.sides &&
-      this.lines.length === this.currentShape.sides
+      this.selectedDots.length !== this.currentShape.sides ||
+      this.lines.length !== this.currentShape.sides
     ) {
+      return false;
+    }
 
-      console.log("Shape Completed!");
+
+    if (this.compareShape()) {
+
+      console.log("Shape Matched!");
 
       this.completeShape();
 
@@ -35,7 +39,47 @@ export const game = {
     }
 
 
+    console.log("Wrong Shape!");
+
     return false;
+  },
+
+
+  compareShape() {
+
+    if (
+      this.selectedDots.length === this.currentShape.sides &&
+      this.lines.length === this.currentShape.sides
+    ) {
+
+      return true;
+
+    }
+
+
+    return false;
+
+  },
+  getArea(points) {
+
+    let area = 0;
+
+
+    for (let i = 0; i < points.length; i++) {
+
+      const next =
+        (i + 1) % points.length;
+
+
+      area +=
+        points[i].x * points[next].y -
+        points[next].x * points[i].y;
+
+    }
+
+
+    return Math.abs(area / 2);
+
   },
 
 
@@ -46,29 +90,28 @@ export const game = {
     console.log("Score:", this.score);
 
 
-
-    // reset selected data
     this.selectedDots = [];
     this.lines = [];
     this.isClosed = false;
 
 
-
-    // reset dots selection
     this.dots.forEach(dot => {
       dot.selected = false;
     });
 
 
-
-    // Generate next shape
     this.currentShape = getRandomShape();
 
 
     console.log(
       "Next Shape:",
-      this.currentShape.sides
+      this.currentShape
     );
+
+
+    if (this.onShapeComplete) {
+      this.onShapeComplete();
+    }
 
   }
 
