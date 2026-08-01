@@ -1,4 +1,4 @@
-import { drawShape } from "./shapes.js";
+import { drawShape, generatePoints } from "./shapes.js";
 import { game } from "./game.js";
 import { generateDotGrid } from "./dots.js";
 
@@ -12,7 +12,6 @@ export function initializeCanvas() {
   shapeCanvas.width = 300;
   shapeCanvas.height = 300;
 
-
   gameCanvas.width = 1080;
   gameCanvas.height = 1480;
 
@@ -20,10 +19,10 @@ export function initializeCanvas() {
   const shapeCtx = shapeCanvas.getContext("2d");
   const gameCtx = gameCanvas.getContext("2d");
 
+
+
   game.onShapeComplete = () => {
 
-
-    // New dots generate
     game.dots = generateDotGrid(
       gameCanvas.width,
       gameCanvas.height,
@@ -31,30 +30,29 @@ export function initializeCanvas() {
     );
 
 
-    // Update target shape
     updateTargetShape(
       shapeCtx,
       shapeCanvas
     );
 
 
-    // Draw new dots
     redraw(gameCtx);
-
 
   };
 
 
-  // Draw target shape
-  drawShape(
+
+  // First target shape draw
+
+  updateTargetShape(
     shapeCtx,
-    shapeCanvas.width,
-    shapeCanvas.height,
-    game.currentShape.sides
+    shapeCanvas
   );
 
 
+
   // Generate dots
+
   game.dots = generateDotGrid(
     gameCanvas.width,
     gameCanvas.height,
@@ -66,118 +64,40 @@ export function initializeCanvas() {
 
 
 
-  // Click Event
 
-  gameCanvas.addEventListener("click", (event) => {
-
-
-    const rect = gameCanvas.getBoundingClientRect();
+  gameCanvas.addEventListener(
+    "click",
+    (event) => {
 
 
-    const mouseX =
-      (event.clientX - rect.left) *
-      (gameCanvas.width / rect.width);
+      const rect =
+        gameCanvas.getBoundingClientRect();
 
 
-    const mouseY =
-      (event.clientY - rect.top) *
-      (gameCanvas.height / rect.height);
+      const mouseX =
+        (event.clientX - rect.left) *
+        (gameCanvas.width / rect.width);
 
 
-
-    game.dots.forEach((dot) => {
-
-
-      if (dot.isClicked(mouseX, mouseY)) {
+      const mouseY =
+        (event.clientY - rect.top) *
+        (gameCanvas.height / rect.height);
 
 
 
-        // Close Shape
-        if (
-          game.selectedDots.length >= 3 &&
-          dot === game.selectedDots[0]
-        ) {
+      game.dots.forEach(dot => {
 
 
-          const last =
-            game.selectedDots[
-            game.selectedDots.length - 1
-            ];
-
-
-          game.lines.push({
-            start: last,
-            end: dot
-          });
-
-
-          game.isClosed = true;
-
-
-          // আগে draw করো
-          redraw(gameCtx);
-
-
-          console.log("Shape Closed");
-
-
-          const completed =
-            game.checkShapeComplete();
-
-
-          if (!completed) {
-            redraw(gameCtx);
-          }
-
-
-          console.log(
-            "Completed:",
-            completed
-          );
-
-
-          console.log(
-            "Selected Dots:",
-            game.selectedDots.length,
-            "Lines:",
-            game.lines.length
-          );
+        if (dot.isClicked(mouseX, mouseY)) {
 
 
 
-          // if (completed) {
+          // Close shape
 
-          //   alert("Level Complete!");
-
-          // }
-          console.log(
-            "Lines after close:",
-            game.lines
-          );
-
-
-          return;
-
-        }
-
-
-
-
-        // Select New Dot
-
-        if (!dot.selected) {
-
-
-          dot.selected = true;
-
-
-          game.selectedDots.push(dot);
-
-
-
-          // Create line between dots
-
-          if (game.selectedDots.length >= 2) {
+          if (
+            game.selectedDots.length >= 3 &&
+            dot === game.selectedDots[0]
+          ) {
 
 
             const last =
@@ -186,58 +106,128 @@ export function initializeCanvas() {
               ];
 
 
-            const prev =
-              game.selectedDots[
-              game.selectedDots.length - 2
-              ];
-
-
 
             game.lines.push({
-
-              start: prev,
-
-              end: last
-
+              start: last,
+              end: dot
             });
+
+
+
+            game.isClosed = true;
+
+
+            redraw(gameCtx);
+
+
+
+            const completed =
+              game.checkShapeComplete();
+
+
+
+            if (!completed) {
+
+              redraw(gameCtx);
+
+            }
+
+
+            console.log(
+              "Completed:",
+              completed
+            );
+
+
+            return;
 
           }
 
 
 
-          redraw(gameCtx);
+
+          // Select dot
+
+          if (!dot.selected) {
+
+
+            dot.selected = true;
+
+
+            game.selectedDots.push(dot);
+
+
+
+            if (game.selectedDots.length >= 2) {
+
+
+              const last =
+                game.selectedDots[
+                game.selectedDots.length - 1
+                ];
+
+
+              const prev =
+                game.selectedDots[
+                game.selectedDots.length - 2
+                ];
+
+
+
+              game.lines.push({
+
+                start: prev,
+                end: last
+
+              });
+
+
+            }
+
+
+
+            redraw(gameCtx);
+
+          }
+
+
 
         }
 
 
-      }
+      });
 
 
-    });
-
-
-  });
+    }
+  );
 
 
 }
+
+
+
+
+
 function updateTargetShape(ctx, canvas) {
 
-  ctx.clearRect(
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
+
+  const points =
+    generatePoints(
+      game.currentShape.sides,
+      canvas.width,
+      canvas.height
+    );
 
 
   drawShape(
     ctx,
     canvas.width,
     canvas.height,
-    game.currentShape.sides
+    points
   );
 
 }
+
 
 
 
@@ -255,15 +245,14 @@ function redraw(ctx) {
 
 
 
-  // Draw Lines
+  // Lines
 
   ctx.strokeStyle = "#2196F3";
-
   ctx.lineWidth = 6;
 
 
 
-  game.lines.forEach((line) => {
+  game.lines.forEach(line => {
 
 
     ctx.beginPath();
@@ -289,9 +278,9 @@ function redraw(ctx) {
 
 
 
-  // Draw Dots
+  // Dots
 
-  game.dots.forEach((dot) => {
+  game.dots.forEach(dot => {
 
     dot.draw(ctx);
 

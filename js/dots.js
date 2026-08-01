@@ -31,12 +31,28 @@ export function generateDotGrid(width, height, level = 1) {
   const dots = [];
 
 
-  const rows = 8 + level * 2;
-  const cols = 6 + level * 2;
+  let rows;
+  let cols;
 
 
-  const marginX = width * 0.12;
-  const marginY = height * 0.12;
+  if (level === 1) {
+    rows = 8;
+    cols = 6;
+  }
+
+  else if (level === 2) {
+    rows = 12;
+    cols = 8;
+  }
+
+  else {
+    rows = 16;
+    cols = 10;
+  }
+
+
+  const marginX = width * 0.15;
+  const marginY = height * 0.15;
 
 
   const gapX =
@@ -64,5 +80,4 @@ export function generateDotGrid(width, height, level = 1) {
 
 
   return dots;
-
 }

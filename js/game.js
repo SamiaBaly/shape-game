@@ -1,9 +1,33 @@
 import { getRandomShape } from "./shapes.js";
 
+
+function updateUI(game) {
+
+  const score =
+    document.getElementById("score");
+
+  const level =
+    document.getElementById("level");
+
+
+  if (score) {
+    score.innerText = game.score;
+  }
+
+  if (level) {
+    level.innerText = game.level;
+  }
+
+}
+
+
+
 export const game = {
 
   score: 0,
   level: 1,
+  completedShapes: 0,
+
   onShapeComplete: null,
 
   currentShape: getRandomShape(1),
@@ -17,6 +41,7 @@ export const game = {
 
   checkShapeComplete() {
 
+
     if (!this.isClosed) {
       return false;
     }
@@ -26,8 +51,11 @@ export const game = {
       this.selectedDots.length !== this.currentShape.sides ||
       this.lines.length !== this.currentShape.sides
     ) {
+
       return false;
+
     }
+
 
 
     if (this.compareShape()) {
@@ -37,182 +65,148 @@ export const game = {
       this.completeShape();
 
       return true;
+
     }
 
 
     console.log("Wrong Shape!");
 
-    // remove lines
-    this.lines = [];
-
-    // remove selected dots
-    this.selectedDots.forEach(dot => {
-      dot.selected = false;
-    });
-
-    this.selectedDots = [];
-
-    this.isClosed = false;
-
+    this.resetSelection();
 
     return false;
+
   },
+
 
 
   compareShape() {
 
+
     const sides = this.selectedDots.length;
+
 
     if (sides !== this.currentShape.sides) {
       return false;
     }
 
 
-    const points = [...this.selectedDots];
+    return true;
+
+  },
 
 
-    const centerX =
-      points.reduce((sum, p) => sum + p.x, 0) / sides;
 
-    const centerY =
-      points.reduce((sum, p) => sum + p.y, 0) / sides;
+  resetSelection() {
 
 
-    points.sort((a, b) => {
+    this.lines = [];
 
-      return (
-        Math.atan2(a.y - centerY, a.x - centerX) -
-        Math.atan2(b.y - centerY, b.x - centerX)
-      );
+
+    this.selectedDots.forEach(dot => {
+
+      dot.selected = false;
 
     });
 
 
-    const lengths = [];
+    this.selectedDots = [];
 
-
-    for (let i = 0; i < sides; i++) {
-
-      const next = (i + 1) % sides;
-
-      const dx = points[i].x - points[next].x;
-      const dy = points[i].y - points[next].y;
-
-      lengths.push(
-        Math.sqrt(dx * dx + dy * dy)
-      );
-
-    }
-
-
-    const avg =
-      lengths.reduce((a, b) => a + b, 0) / sides;
-
-
-    return lengths.every(length =>
-      Math.abs(length - avg) < avg * 0.5
-    );
+    this.isClosed = false;
 
   },
-  findNearestDots() {
 
-    return this.currentShape.points.map(point => {
-
-      let nearest = null;
-      let minDistance = Infinity;
-
-
-      this.dots.forEach(dot => {
-
-        const distance =
-          Math.sqrt(
-            (dot.x - point.x) ** 2 +
-            (dot.y - point.y) ** 2
-          );
-
-
-        if (distance < minDistance) {
-
-          minDistance = distance;
-          nearest = dot;
-
-        }
-
-      });
-
-
-      return nearest;
-
-    });
-
-  },
-  getArea(points) {
-
-    let area = 0;
-
-
-    for (let i = 0; i < points.length; i++) {
-
-      const next =
-        (i + 1) % points.length;
-
-
-      area +=
-        points[i].x * points[next].y -
-        points[next].x * points[i].y;
-
-    }
-
-
-    return Math.abs(area / 2);
-
-  },
 
 
   completeShape() {
 
+
     this.score += 10;
-    if (this.score >= 50) {
+
+    this.completedShapes++;
+
+
+
+    // 4টা shape complete হলে level up
+    if (
+      this.completedShapes >= 4 &&
+      this.level === 1
+    ) {
+
       this.level = 2;
+
     }
 
-    if (this.score >= 100) {
+
+
+    // 8টা complete হলে level 3
+    if (
+      this.completedShapes >= 8 &&
+      this.level === 2
+    ) {
+
       this.level = 3;
+
     }
 
-    console.log("Score:", this.score);
+
+
+    console.log(
+      "Score:",
+      this.score,
+      "Level:",
+      this.level,
+      "Completed:",
+      this.completedShapes
+    );
+
+
+
+    updateUI(this);
+
 
 
     setTimeout(() => {
 
-      this.selectedDots = [];
-      this.lines = [];
-      this.isClosed = false;
+
+      this.resetSelection();
+
 
 
       this.dots.forEach(dot => {
+
         dot.selected = false;
+
       });
 
 
-      this.currentShape = getRandomShape(this.level);
+
+      // নতুন shape
+      this.currentShape =
+        getRandomShape(this.level);
+
+
+
       console.log(
         "New Shape:",
         this.currentShape.id,
-        "Sides:",
-        this.currentShape.sides,
         "Level:",
         this.level
       );
 
 
+
       if (this.onShapeComplete) {
+
         this.onShapeComplete();
+
       }
+
+
 
     }, 700);
 
 
   }
+
 
 };
