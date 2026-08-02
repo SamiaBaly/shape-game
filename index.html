@@ -4,69 +4,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shape Game</title>
 
-  <link rel="stylesheet" href="./css/style.css" />
+  <title>Shape Master</title>
+
+  <link rel="stylesheet" href="./css/home.css" />
+
 </head>
+
 
 <body>
 
-  <div id="game-container">
-  
-    <!-- Header -->
-    <header id="game-header">
+
+  <div class="home-container">
+
+
+    <div class="logo-area">
     
-      <div class="left-section">
-        <button id="settings-btn">⚙️</button>
+      <div class="shape triangle"></div>
     
-        <div id="game-info">
-          <span>Score: <strong id="score">0</strong></span>
-          <span>Level: <strong id="level">1</strong></span>
-        </div>
-      </div>
+      <div class="shape circle"></div>
     
-    </header>
-  
-    <!-- Target Shape -->
-    <section id="target-area">
-      <h2>Target Shape</h2>
-  
-      <canvas id="shapeCanvas"></canvas>
-    </section>
-  
-    <!-- Play Area -->
-    <section id="play-area">
-      <canvas id="gameCanvas"></canvas>
-    </section>
-  
-    <!-- Settings -->
-    <div id="settings-menu" class="hidden">
-    
-      <button class="menu-btn" id="home-btn">
-        🏠
-        <span>Home</span>
-      </button>
-    
-      <button class="menu-btn" id="clue-btn">
-        💡
-        <span>Clue</span>
-      </button>
-    
-      <button class="menu-btn" id="retry-btn">
-        🔄
-        <span>Retry</span>
-      </button>
-    
-      <button class="menu-btn" id="share-btn">
-        📤
-        <span>Share</span>
-      </button>
+      <div class="shape square"></div>
     
     </div>
-  
+
+
+    <h1>
+      Shape Master
+    </h1>
+
+
+    <p>
+      Connect the dots and complete the target shape
+    </p>
+
+
+    <button id="start-btn">
+      Start Game
+    </button>
+
+
+    <div class="features">
+
+      <div>
+        ⭐
+        <span>Levels</span>
+      </div>
+
+      <div>
+        🎯
+        <span>Challenges</span>
+      </div>
+
+      <div>
+        🏆
+        <span>Score</span>
+      </div>
+
+    </div>
+
+
   </div>
 
-  <script type="module" src="./js/main.js"></script>
+
+
+  <script src="./js/home.js"></script>
+
 
 </body>
 

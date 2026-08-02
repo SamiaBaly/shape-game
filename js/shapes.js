@@ -1,53 +1,44 @@
 export const SHAPES = [
-
   {
     id: "triangle",
     sides: 3,
-    level: 1,
+    level: 1
   },
-
   {
     id: "square",
     sides: 4,
-    level: 1,
+    level: 2
   },
-
   {
     id: "pentagon",
     sides: 5,
-    level: 1,
+    level: 3
   },
-
   {
     id: "hexagon",
     sides: 6,
-    level: 2,
+    level: 4
   },
-
   {
     id: "heptagon",
     sides: 7,
-    level: 2,
+    level: 5
   },
-
   {
     id: "octagon",
     sides: 8,
-    level: 3,
+    level: 6
   },
-
   {
     id: "nonagon",
     sides: 9,
-    level: 3,
+    level: 7
   },
-
   {
     id: "decagon",
     sides: 10,
-    level: 3,
-  },
-
+    level: 8
+  }
 ];
 
 
@@ -107,66 +98,28 @@ export function generatePoints(
 
 
 
-export function getRandomShape(level = 1) {
+export function getRandomShape(level) {
 
+  let availableShapes;
 
-  const availableShapes =
-    SHAPES.filter(
-      shape =>
-        shape.level === level
-    );
+  if (level <= 8) {
+    // প্রতি level এ 4টি consecutive shape
+    availableShapes = SHAPES.slice(level - 1, level + 3);
 
-
-
-  let shape;
-
-
-
-  do {
-
-
-    const randomIndex =
-      Math.floor(
-        Math.random() *
-        availableShapes.length
+    // যদি 4টির কম থাকে, শুরু থেকে পূরণ করবে
+    while (availableShapes.length < 4) {
+      availableShapes.unshift(
+        SHAPES[availableShapes.length % SHAPES.length]
       );
-
-
-    shape =
-      availableShapes[randomIndex];
-
-
-
+    }
+  } else {
+    // Level 9+ এ সব shape random
+    availableShapes = SHAPES;
   }
-  while (
-    shape.id === lastShapeId &&
-    availableShapes.length > 1
-  );
 
-
-
-  lastShapeId =
-    shape.id;
-
-
-
-  return {
-
-
-    ...shape,
-
-
-    points:
-      generatePoints(
-        shape.sides,
-        1080,
-        1480
-      )
-
-
-  };
-
-
+  return availableShapes[
+    Math.floor(Math.random() * availableShapes.length)
+  ];
 }
 
 
@@ -224,9 +177,9 @@ export function drawShape(
 
 
 
-  ctx.lineWidth = 4;
+  ctx.lineWidth = 8;
 
-  ctx.strokeStyle = "#222";
+  ctx.strokeStyle = "#ffffff";
 
   ctx.stroke();
 

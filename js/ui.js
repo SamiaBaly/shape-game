@@ -1,143 +1,132 @@
 import { game } from "./game.js";
 
-const settingsBtn =
-  document.getElementById("settings-btn");
-
-const settingsMenu =
-  document.getElementById("settings-menu");
 
 
-const homeBtn =
-  document.getElementById("home-btn");
+const settingsBtn = document.getElementById("settings-btn");
+const settingsMenu = document.getElementById("settings-menu");
 
-const clueBtn =
-  document.getElementById("clue-btn");
-
-const retryBtn =
-  document.getElementById("retry-btn");
-
-const shareBtn =
-  document.getElementById("share-btn");
+const homeBtn = document.getElementById("home-btn");
+const clueBtn = document.getElementById("clue-btn");
+const retryBtn = document.getElementById("retry-btn");
+const shareBtn = document.getElementById("share-btn");
 
 
+// Settings open / close
+settingsBtn.addEventListener("click", () => {
 
-// Settings open close
-settingsBtn.addEventListener(
-  "click",
-  () => {
+  settingsMenu.classList.toggle("hidden");
 
-    settingsMenu.classList.toggle(
-      "hidden"
-    );
-
-  }
-);
-
+});
 
 
 // Home
-homeBtn.addEventListener(
-  "click",
-  () => {
+homeBtn.addEventListener("click", () => {
 
-    location.reload();
+  window.location.href = "./index.html";
 
-  }
-);
-
+});
 
 
 // Clue
-clueBtn.addEventListener(
-  "click",
-  () => {
+clueBtn.addEventListener("click", () => {
 
-    alert(
-      `Make a ${game.currentShape.id}`
-    );
+  const clueMessage =
+    document.getElementById("clue-message");
 
-  }
-);
 
+  const sides = game.currentShape.sides;
+
+  clueMessage.innerText =
+    `💡 Match ${sides} dots to complete the ${game.currentShape.id}`;
+
+
+  const shapeCanvas =
+    document.getElementById("shapeCanvas");
+
+
+  clueMessage.classList.remove("hidden");
+
+  shapeCanvas.classList.add("clue-highlight");
+
+
+  setTimeout(() => {
+
+    clueMessage.classList.add("hidden");
+
+    shapeCanvas.classList.remove("clue-highlight");
+
+  }, 2000);
+
+
+  settingsMenu.classList.add("hidden");
+
+});
 
 
 // Retry
-retryBtn.addEventListener(
-  "click",
-  () => {
+retryBtn.addEventListener("click", () => {
 
 
-    game.selectedDots = [];
-
-    game.lines = [];
-
-    game.isClosed = false;
+  game.resetSelection();
 
 
-    game.dots.forEach(dot => {
+  game.dots.forEach(dot => {
 
-      dot.selected = false;
+    dot.selected = false;
 
-    });
-
-
-    location.reload();
+  });
 
 
-  }
-);
+  settingsMenu.classList.add("hidden");
 
+
+});
 
 
 // Share
-shareBtn.addEventListener(
-  "click",
-  async () => {
+shareBtn.addEventListener("click", async () => {
 
 
-    const shareData = {
+  const shareData = {
 
-      title: "Shape Game",
+    title: "Shape Game",
 
-      text: "Try this Shape Game!",
+    text: "Try this Shape Game!",
 
-      url: window.location.href
+    url: window.location.href
 
-    };
-
-
-
-    try {
+  };
 
 
-      if (navigator.share) {
-
-        await navigator.share(
-          shareData
-        );
-
-      }
-      else {
-
-        await navigator.clipboard.writeText(
-          window.location.href
-        );
+  try {
 
 
-        alert(
-          "Link copied!"
-        );
+    if (navigator.share) {
 
-      }
+      await navigator.share(shareData);
 
 
-    }
-    catch (error) {
+    } else {
 
-      console.log(error);
+
+      await navigator.clipboard.writeText(
+        window.location.href
+      );
+
+
+      alert("Link copied!");
 
     }
 
+
+  } catch (error) {
+
+    console.log(error);
 
   }
-);
+
+
+  settingsMenu.classList.add("hidden");
+
+
+});

@@ -1,17 +1,37 @@
 export class Dot {
-  constructor(x, y, radius = 8) {
+  constructor(x, y, radius = 25) {
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.selected = false;
+    this.highlight = false;
   }
 
   draw(ctx) {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
 
-    ctx.fillStyle = this.selected ? "#ff4757" : "#111";
+    ctx.arc(
+      this.x,
+      this.y,
+      this.radius,
+      0,
+      Math.PI * 2
+    );
+    if (this.highlight) {
+
+      ctx.shadowColor = "#38BDF8";
+      ctx.shadowBlur = 30;
+
+    }
+
+    if (this.selected) {
+      ctx.fillStyle = "#ff4757";
+    } else {
+      ctx.fillStyle = "#ffffff";
+    }
+
     ctx.fill();
+    ctx.shadowBlur = 0;
 
     ctx.closePath();
   }
@@ -20,9 +40,12 @@ export class Dot {
     const dx = this.x - mouseX;
     const dy = this.y - mouseY;
 
-    const distance = Math.sqrt(dx * dx + dy * dy);
+    const distance = Math.sqrt(
+      dx * dx + dy * dy
+    );
 
-    return distance <= this.radius + 8;
+    // Click area একটু বড়
+    return distance <= this.radius + 15;
   }
 }
 
@@ -30,47 +53,51 @@ export function generateDotGrid(width, height, level = 1) {
 
   const dots = [];
 
+  // Infinite level difficulty
+  let rows = 5 + Math.floor(level / 2);
+  let cols = 5 + Math.floor(level / 3);
 
-  let rows;
-  let cols;
+  // Maximum limit
+  rows = Math.min(rows, 15);
+  cols = Math.min(cols, 10);
 
+  const radius = Math.max(14, 25 - Math.floor(level / 2));
 
-  if (level === 1) {
-    rows = 8;
-    cols = 6;
-  }
+  // Padding
+  const marginX = radius + 30;
+  const marginY = radius + 70;
 
-  else if (level === 2) {
-    rows = 12;
-    cols = 8;
-  }
-
-  else {
-    rows = 16;
-    cols = 10;
-  }
-
-
-  const marginX = width * 0.15;
-  const marginY = height * 0.15;
-
+  const availableWidth = width - marginX * 2;
+  const availableHeight = height - marginY * 2;
 
   const gapX =
-    (width - marginX * 2) / (cols - 1);
-
+    cols > 1
+      ? availableWidth / (cols - 1)
+      : 0;
 
   const gapY =
-    (height - marginY * 2) / (rows - 1);
-
+    rows > 1
+      ? availableHeight / (rows - 1)
+      : 0;
+  const pattern = Math.floor(Math.random() * 3);
 
   for (let row = 0; row < rows; row++) {
 
     for (let col = 0; col < cols; col++) {
 
+      let x = marginX + col * gapX;
+      let y = marginY + row * gapY;
+
+      // Zigzag / Honeycomb Layout
+      if (row % 2 === 1) {
+        x += gapX / 2;
+      }
+
       dots.push(
         new Dot(
-          marginX + col * gapX,
-          marginY + row * gapY
+          x,
+          y,
+          radius
         )
       );
 
@@ -78,6 +105,6 @@ export function generateDotGrid(width, height, level = 1) {
 
   }
 
-
   return dots;
+
 }
