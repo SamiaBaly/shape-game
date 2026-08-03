@@ -63,35 +63,57 @@ body {
 ========================= */
 
 #game-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(90deg,
-      #1E3A8A,
-      #2563EB);
-  color: white;
 
-  padding: 20px 24px;
+  height: 90px;
+
+  padding: 12px 18px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  background: linear-gradient(180deg, #2F5FD6, #2953C7);
+
+}
+#game-content {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 12px;
 }
 
 .left-section {
+
+  width: 100%;
+
   display: flex;
+
   align-items: center;
-  gap: 20px;
+
+  gap: 18px;
+
 }
 
 #settings-btn {
-  width: 60px;
-  height: 60px;
 
-  border: none;
+  width: 64px;
+  height: 64px;
+
+  flex-shrink: 0;
+
   border-radius: 50%;
 
-  background: #111827;
-  color: white;
-
   font-size: 28px;
-  cursor: pointer;
+
+  background: #172554;
+
+  border: none;
+
 }
 
 #settings-btn:hover {
@@ -99,11 +121,29 @@ body {
 }
 
 #game-info {
-  display: flex;
-  gap: 20px;
 
-  font-size: 22px;
+  flex: 1;
+
+  height: 58px;
+
+  border-radius: 40px;
+
+  background: rgba(255, 255, 255, .08);
+
+  border: 1px solid rgba(255, 255, 255, .15);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 40px;
+
+  font-size: 24px;
+
   font-weight: bold;
+
 }
 
 /* =========================
@@ -111,40 +151,33 @@ body {
 ========================= */
 
 #target-area {
+
+  width: 420px;
+
+  max-width: 90%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(180deg,
-      #1E293B,
-      #111827);
 
-  gap: 20px;
-  border: 2px solid #334155;
-  border-radius: 20px;
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, .35);
-
-  margin: 20px;
-    margin-bottom: 10px;
-  padding: 20px;
+  margin-bottom: 16px;
 }
 
 #target-area h2 {
-  font-size: 28px;
-  color: white;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #F59E0B;
+  margin-bottom: 8px;
 }
 
 #shapeCanvas {
   width: 180px;
   height: 180px;
-
-  background: rgba(255, 255, 255, .12);
-  backdrop-filter: blur(12px);
-  border: 2px solid rgba(59, 130, 246, .6);
-  border-radius: 20px;
-
-  box-shadow:
-    0 0 25px rgba(37, 99, 235, .4);
+  background: rgba(255, 255, 255, .03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .08);
+  padding: 12px;
 }
 
 /* =========================
@@ -152,37 +185,32 @@ body {
 ========================= */
 
 #play-area {
+
   flex: 1;
 
+  margin: 6px 16px 16px;
+
   display: flex;
+
   justify-content: center;
-  align-items: center;
-  /* padding: 10px 10px 20px; */
-  margin: 20px;
+
+  align-items: flex-start;
 
   overflow: hidden;
+
 }
 
 #gameCanvas {
-  display: block;
 
   width: 100%;
-  height: auto;
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 
-  max-height: 100%;
-
-  background: rgba(255, 255, 255, .05);
-  backdrop-filter: blur(12px);
-
-  border: 2px solid rgba(59, 130, 246, .6);
-  border-radius: 20px;
-
-  box-shadow: 0 0 25px rgba(37, 99, 235, .3);
-
-  margin: 0 auto;
-  padding: 10px;
 }
-
 /* =========================
    SETTINGS MENU
 ========================= */
