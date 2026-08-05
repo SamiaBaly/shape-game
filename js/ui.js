@@ -132,15 +132,3 @@ shareBtn.addEventListener("click", async () => {
 
 
 });
-const soundBtn = document.getElementById("sound-btn");
-
-
-soundBtn.addEventListener("click", () => {
-
-  toggleSound();
-
-
-  soundBtn.innerHTML =
-    soundEnabled ? "🔊" : "🔇";
-
-});

@@ -2,6 +2,8 @@ export const bgMusic = new Audio("./assets/sounds/bg.mp3");
 export const wrongSound = new Audio("./assets/sounds/error.mp3");
 export const correctSound = new Audio("./assets/sounds/success.mp3");
 export const levelSound = new Audio("./assets/sounds/victory.mp3");
+
+
 export let soundEnabled = true;
 
 
@@ -16,12 +18,22 @@ levelSound.volume = 0.8;
 
 export function playBG() {
 
+  if (!soundEnabled) return;
+
   if (bgMusic.paused) {
 
     bgMusic.play()
       .catch(() => { });
 
   }
+
+}
+
+
+
+export function stopBG() {
+
+  bgMusic.pause();
 
 }
 
@@ -34,11 +46,14 @@ function pauseBG() {
 }
 
 
-
 function resumeBG() {
 
-  bgMusic.play()
-    .catch(() => { });
+  if (soundEnabled) {
+
+    bgMusic.play()
+      .catch(() => { });
+
+  }
 
 }
 
@@ -56,6 +71,7 @@ function stopSound(sound) {
 export function playCorrect() {
 
   if (!soundEnabled) return;
+
 
   pauseBG();
 
@@ -81,7 +97,9 @@ export function playWrong() {
 
   if (!soundEnabled) return;
 
+
   pauseBG();
+
 
   wrongSound.currentTime = 0;
 
@@ -105,7 +123,9 @@ export function playVictory() {
 
   if (!soundEnabled) return;
 
+
   pauseBG();
+
 
   levelSound.currentTime = 0;
 
@@ -122,24 +142,22 @@ export function playVictory() {
   }, 2000);
 
 }
-export function toggleSound() {
 
+
+
+export function toggleSound() {
   soundEnabled = !soundEnabled;
 
+  console.log("soundEnabled:", soundEnabled);
 
   if (soundEnabled) {
-
-    playBG();
-
-  }
-  else {
-
+    console.log("PLAY");
+    bgMusic.play().catch(console.error);
+  } else {
+    console.log("PAUSE");
     bgMusic.pause();
-
-    wrongSound.pause();
-    correctSound.pause();
-    levelSound.pause();
-
+    console.log("paused =", bgMusic.paused);
   }
 
+  return soundEnabled;
 }

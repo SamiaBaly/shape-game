@@ -181,10 +181,13 @@ export function generateDotGrid(width, height, level = 1) {
     startY = 30;
   } else {
     // Large Desktop
-    radius = 8;
-    boardWidth = width * 0.72;
-    boardHeight = height * 0.45;
-    startY = 45;
+    radius = 10;
+
+    boardWidth = width * 0.80;
+
+    boardHeight = height * 0.75;
+
+    startY = 70;
   }
 
   const startX = (width - boardWidth) / 2;

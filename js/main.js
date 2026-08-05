@@ -1,24 +1,27 @@
 import { initializeCanvas } from "./canvas.js";
 import { game } from "./game.js";
-import { playBG } from "./audio.js";
+import { toggleSound } from "./audio.js";
 import "./ui.js";
-
 
 document.addEventListener("DOMContentLoaded", () => {
 
   initializeCanvas(game);
 
+  const soundBtn = document.getElementById("sound-btn");
 
-  // প্রথম user interaction এর পরে BG music চালু হবে
-  document.addEventListener(
-    "click",
-    () => {
+  if (soundBtn) {
 
-      playBG();
+    soundBtn.innerHTML = "🔊";
 
-    },
-    { once: true }
-  );
+    soundBtn.addEventListener("click", (e) => {
+      console.trace("toggleSound");
+      e.preventDefault();
+      e.stopPropagation();
 
+      const status = toggleSound();
+      soundBtn.innerHTML = status ? "🔊" : "🔇";
+    });
+
+  }
 
 });

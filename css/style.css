@@ -179,35 +179,34 @@ body {
 
   flex: 1;
 
-  margin: 6px 16px 16px;
-  padding-bottom: 30px;
+  width: 100%;
+
+  margin: 0;
+
+  padding: 0 10px 10px;
 
   display: flex;
 
   justify-content: center;
 
-  align-items: flex-start;
+  align-items: stretch;
 
   overflow: hidden;
 
 }
 
+
 #gameCanvas {
 
   width: 100%;
+
   height: 100%;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
+
+  display: block;
 
 }
-/* =========================
-   SETTINGS MENU
-========================= */
 
-/* Settings Menu */
+
 /* =========================
    SETTINGS MENU
 ========================= */
@@ -974,47 +973,78 @@ body {
 
 @media (min-width:1201px) {
 
+
   #game-container {
+
     width: 420px;
-    height: 95vh;
-    max-height: 760px;
+
+    height: 760px;
+
   }
+
 
   #game-header {
-    height: 65px;
+
+    height: 70px;
+
     padding: 10px 14px;
+
   }
+
+
 
   #settings-btn {
+
     width: 46px;
+
     height: 46px;
+
     font-size: 22px;
+
   }
+
 
   #game-info {
+
     height: 46px;
+
     font-size: 17px;
+
     gap: 20px;
+
   }
 
-  #target-area {
-    margin-bottom: 8px;
-  }
 
-  #target-area h2 {
-    font-size: 15px;
-    margin-bottom: 4px;
-  }
 
   #shapeCanvas {
-    width: 120px;
-    height: 120px;
+
+    width: 210px;
+
+    height: 210px;
+
   }
 
-  #play-area {
-    margin: 8px;
-    padding-bottom: 8px;
+
+
+  #target-area {
+
+    margin-bottom: 5px;
+
   }
+
+
+
+  #play-area {
+
+    flex: 1;
+
+    margin: 0;
+
+    padding: 0 8px 8px;
+
+  }
+
+
 }
 #sound-btn {
 
@@ -1106,99 +1136,6 @@ body {
 
     flex-shrink: 0;
 
-  }
-
-}
-/* FINAL RESPONSIVE FIX */
-
-@media (min-width:1200px) {
-
-  #game-container {
-    width: 420px;
-    height: 760px;
-  }
-
-
-  #game-header {
-    height: 65px;
-    padding: 10px 14px;
-  }
-
-
-  .left-section {
-    gap: 10px;
-  }
-
-
-  #settings-btn {
-    width: 46px;
-    height: 46px;
-    font-size: 22px;
-  }
-
-
-  #game-info {
-
-    height: 46px;
-    font-size: 17px;
-    gap: 20px;
-
-  }
-
-
-  #sound-btn {
-
-    width: 46px;
-    height: 46px;
-    font-size: 22px;
-
-  }
-
-}
-/* HEADER FINAL FIX */
-
-#game-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-
-.left-section {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-  min-width: 0;
-}
-
-
-#game-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-#sound-btn {
-  flex-shrink: 0;
-}
-
-
-@media (max-width:768px) {
-
-  #game-header {
-    height: 70px;
-    padding: 8px 10px;
-  }
-
-
-  #game-info {
-    font-size: 14px;
-    gap: 8px;
-    padding: 0 8px;
   }
 
 }

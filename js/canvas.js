@@ -17,23 +17,22 @@ export function initializeCanvas() {
   const shapeCanvas = document.getElementById("shapeCanvas");
   const gameCanvas = document.getElementById("gameCanvas");
 
-  shapeCanvas.width = 300;
-  shapeCanvas.height = 300;
 
-  const aspect = window.innerWidth / window.innerHeight;
+  shapeCanvas.width = 400;
+  shapeCanvas.height = 400;
+
 
   gameCanvas.width = 1080;
 
+
   if (window.innerWidth <= 768) {
+
     gameCanvas.height = 1480;
 
-  } else if (aspect > 1.6) {
-    // Wide laptop
-    gameCanvas.height = 1300;
-
   } else {
-    // Normal desktop
-    gameCanvas.height = 1100;
+
+    gameCanvas.height = 1250;
+
   }
 
   const shapeCtx = shapeCanvas.getContext("2d");
@@ -310,18 +309,49 @@ function updateTargetShape(ctx, canvas) {
   redraw(gameCtx);
 
   console.log(game.currentShape.pattern);
-  const points = getShapePoints(
+
+  let points = getShapePoints(
     game.currentShape,
     game.dots
   );
 
+
+  // shape center calculate
+  const minX = Math.min(...points.map(p => p.x));
+  const maxX = Math.max(...points.map(p => p.x));
+
+  const minY = Math.min(...points.map(p => p.y));
+  const maxY = Math.max(...points.map(p => p.y));
+
+
+  const shapeWidth = maxX - minX;
+  const shapeHeight = maxY - minY;
+
+
+  // move to canvas center
+  const offsetX =
+    (canvas.width - shapeWidth) / 2 - minX;
+
+  const offsetY =
+    (canvas.height - shapeHeight) / 2 - minY;
+
+
+
+  points = points.map(p => ({
+    x: p.x + offsetX,
+    y: p.y + offsetY
+  }));
+
+
   game.targetPoints = points;
+
 
   drawShape(
     ctx,
     canvas.width,
     canvas.height,
-    points
+    points,
+    0.65
   );
 
 }
