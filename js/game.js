@@ -274,6 +274,17 @@ export const game = {
       this.selectedDots.length !== total ||
       this.lines.length !== total
     ) {
+
+      console.log("Wrong Shape - Different Dot Count");
+
+      this.lines.forEach(line => {
+        line.correct = false;
+      });
+
+      setTimeout(() => {
+        showWrongPopup();
+      }, 400);
+
       return false;
     }
 

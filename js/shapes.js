@@ -257,6 +257,33 @@ export const SHAPES = [
       { x: -0.5, y: 1 },
       { x: -1, y: 0 }
     ]
+  },
+  // ---------- Level 5 ----------
+  {
+    id: 15,
+    level: 5,
+    difficulty: "medium",
+    name: "Custom Shape",
+    geometry: [
+      { x: 0.6, y: -0.6 },
+      { x: 1, y: -0.6 },
+      { x: 1, y: -0.2 },
+      { x: -0.2, y: 1 },
+      { x: -0.6, y: 0.6 },
+      { x: -0.6, y: 0 }
+    ]
+  },
+  {
+    id: 16,
+    level: 5,
+    difficulty: "medium",
+    name: "Tablet Arrow",
+    geometry: [
+      { x: 0, y: -0.67 },
+      { x: -1, y: 0.33 },
+      { x: 0, y: 0 },
+      { x: 1, y: 0.33 }
+    ]
   }
 
 ];
