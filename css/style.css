@@ -1155,3 +1155,50 @@ body {
   }
 
 }
+/* HEADER FINAL FIX */
+
+#game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+
+#game-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#sound-btn {
+  flex-shrink: 0;
+}
+
+
+@media (max-width:768px) {
+
+  #game-header {
+    height: 70px;
+    padding: 8px 10px;
+  }
+
+
+  #game-info {
+    font-size: 14px;
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+}
