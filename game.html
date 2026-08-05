@@ -10,6 +10,22 @@
 </head>
 
 <body>
+  <!-- Wrong Shape Popup -->
+  <div id="wrong-popup" class="hidden">
+  
+    <div class="wrong-popup-content">
+  
+      <h2>WRONG SHAPE</h2>
+  
+      <p>Try Again!</p>
+  
+      <button id="wrong-retry-btn">
+        RETRY
+      </button>
+  
+    </div>
+  
+  </div>
 
   <div id="game-container">
     <div class="bg-shapes">
@@ -33,6 +49,7 @@
           <span>Level: <strong id="level">1</strong></span>
         </div>
       </div>
+      <button id="sound-btn">🔊</button>
     
     </header>
   
@@ -76,21 +93,37 @@
     
     </div>
     <!-- Level Complete Popup -->
+    <!-- Level Complete Popup -->
     <div id="level-popup" class="hidden">
     
       <div class="popup-content">
     
         <h2 id="popup-title">
-          🎉 Level Complete!
+          SHAPE COMPLETED!
         </h2>
     
-        <p id="popup-score">
-          Score: 0
+    
+        <div class="stars">
+          ⭐ ⭐ ⭐
+        </div>
+
+      <p id="popup-score">Score: 40</p>
+    
+    
+        <p id="popup-message">
+          Perfect! Outstanding!
         </p>
     
+    
         <button id="next-level-btn">
-          Next Level →
+          NEXT LEVEL
         </button>
+    
+    
+      <button id="level-retry-btn">
+        RETRY
+      </button>
+    
     
       </div>
     
@@ -99,6 +132,7 @@
     <div id="clue-message" class="hidden">
       💡 Follow the highlighted shape
     </div>
+  
   
   </div>
 

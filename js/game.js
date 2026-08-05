@@ -1,6 +1,14 @@
 import { getRandomShape } from "./shapes.js";
+import { playCorrect, playWrong } from "./audio.js";
 
+function showWrongPopup() {
+  playWrong();
 
+  document
+    .getElementById("wrong-popup")
+    .classList.remove("hidden");
+
+}
 function updateUI(game) {
 
   const score =
@@ -71,6 +79,7 @@ export const game = {
 
   dots: [],
   selectedDots: [],
+  selectedPattern: [],
   lines: [],
   currentMouse: null,
   targetPoints: [],
@@ -134,56 +143,71 @@ export const game = {
 
   checkShapeComplete() {
 
-
     if (!this.isClosed) {
       return false;
     }
 
+    const total = this.currentShape.pattern.length;
 
     if (
-      this.selectedDots.length !== this.currentShape.sides ||
-      this.lines.length !== this.currentShape.sides
+      this.selectedPattern.length !== total ||
+      this.lines.length !== total
     ) {
-
       return false;
-
     }
-
-
 
     if (this.compareShape()) {
 
       console.log("Shape Matched!");
 
-      this.completeShape();
+      // Green lines
+      this.lines.forEach(line => {
+        line.correct = true;
+      });
+
+      // Redraw so green appears
+      if (this.onShapeComplete) {
+        // শুধু redraw এর জন্য
+      }
+
+      // একটু delay দিয়ে popup/next
+      setTimeout(() => {
+        this.completeShape();
+      }, 500);
 
       return true;
-
     }
-
 
     console.log("Wrong Shape!");
 
-    this.resetSelection();
+    // Red lines
+    this.lines.forEach(line => {
+      line.correct = false;
+    });
+
+    // 800ms পরে reset
+    // popup দেখাও
+    setTimeout(() => {
+      showWrongPopup();
+    }, 400);
 
     return false;
-
   },
 
 
 
   compareShape() {
+    console.log("Target:", this.currentShape.pattern);
+    console.log("Player:", this.selectedPattern);
 
+    const target = this.currentShape.pattern;
+    const player = this.selectedPattern;
 
-    const sides = this.selectedDots.length;
-
-
-    if (sides !== this.currentShape.sides) {
+    if (target.length !== player.length) {
       return false;
     }
 
-
-    return true;
+    return target.every((dotId, index) => dotId === player[index]);
 
   },
 
@@ -191,9 +215,7 @@ export const game = {
 
   resetSelection() {
 
-
     this.lines = [];
-
 
     this.selectedDots.forEach(dot => {
 
@@ -201,14 +223,15 @@ export const game = {
 
     });
 
-
     this.selectedDots = [];
+    this.selectedPattern = [];
 
     this.isClosed = false;
 
   },
 
   completeShape() {
+    playCorrect();
 
     this.score += 10;
 
@@ -245,22 +268,13 @@ export const game = {
 
       return;
     }
+    this.resetSelection();
 
-    setTimeout(() => {
+    this.currentShape = getRandomShape(this.level);
 
-      this.resetSelection();
-
-      this.dots.forEach(dot => {
-        dot.selected = false;
-      });
-
-      this.currentShape = getRandomShape(this.level);
-
-      if (this.onShapeComplete) {
-        this.onShapeComplete();
-      }
-
-    }, 700);
+    if (this.onShapeComplete) {
+      this.onShapeComplete();
+    }
 
   }
   
@@ -268,26 +282,67 @@ export const game = {
 
 };
 const nextLevelBtn = document.getElementById("next-level-btn");
-
 nextLevelBtn.addEventListener("click", () => {
-
-  game.level++;
-
-  game.levelCompletedShapes = 0;
-
-  game.waitingForNextLevel = false;
+  console.log("Retry Clicked");
 
   document
     .getElementById("level-popup")
-    .classList
-    .add("hidden");
+    .classList.add("hidden");
 
-  updateUI(game);
+  game.level++;
+  game.levelCompletedShapes = 0;
+  game.waitingForNextLevel = false;
+
+  game.resetSelection();
 
   game.currentShape = getRandomShape(game.level);
+
+  updateUI(game);
 
   if (game.onShapeComplete) {
     game.onShapeComplete();
   }
 
 });
+
+const retryBtn = document.getElementById("level-retry-btn");
+retryBtn.addEventListener("click", () => {
+
+  console.log("Retry Clicked");
+
+  document
+    .getElementById("level-popup")
+    .classList.add("hidden");
+
+  game.waitingForNextLevel = false;
+  game.levelCompletedShapes = 0;
+
+  game.resetSelection();
+
+  game.currentMouse = null;
+
+  game.currentShape = getRandomShape(game.level);
+
+  // শুধু redraw করো
+  if (game.onShapeComplete) {
+    setTimeout(() => {
+      game.onShapeComplete();
+    }, 50);
+  }
+
+});
+document
+  .getElementById("wrong-retry-btn")
+  .addEventListener("click", () => {
+
+    document
+      .getElementById("wrong-popup")
+      .classList.add("hidden");
+
+    game.resetSelection();
+
+    if (game.onShapeComplete) {
+      game.onShapeComplete();
+    }
+
+  });

@@ -1,4 +1,6 @@
 import { game } from "./game.js";
+import { playWrong } from "./audio.js";
+import { toggleSound, soundEnabled } from "./audio.js";
 
 
 
@@ -128,5 +130,17 @@ shareBtn.addEventListener("click", async () => {
 
   settingsMenu.classList.add("hidden");
 
+
+});
+const soundBtn = document.getElementById("sound-btn");
+
+
+soundBtn.addEventListener("click", () => {
+
+  toggleSound();
+
+
+  soundBtn.innerHTML =
+    soundEnabled ? "🔊" : "🔇";
 
 });
