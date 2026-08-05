@@ -40,7 +40,6 @@ export function initializeCanvas() {
 
   game.onShapeComplete = () => {
     game.selectedDots = [];
-    game.selectedPattern = [];
     game.lines = [];
 
     game.dots = generateDotGrid(
@@ -152,7 +151,6 @@ export function initializeCanvas() {
         dot.selected = true;
       
         game.selectedDots.push(dot);
-        game.selectedPattern.push(dot.id);
 
         if (game.selectedDots.length >= 2) {
 
@@ -262,7 +260,6 @@ export function initializeCanvas() {
         
 
           game.selectedDots.push(dot);
-          game.selectedPattern.push(dot.id);
 
 
           if (game.selectedDots.length >= 2) {
@@ -300,11 +297,10 @@ export function initializeCanvas() {
 
 function updateTargetShape(ctx, canvas) {
 
-  console.log(game.currentShape.pattern);
+  console.log(game.currentShape.geometry);
 
   let points = getShapePoints(
-    game.currentShape,
-    game.dots
+    game.currentShape
   );
 
   // shape center calculate

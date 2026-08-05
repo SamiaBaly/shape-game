@@ -1,6 +1,128 @@
-import { getRandomShape } from "./shapes.js";
+import {
+  getRandomShape,
+  getShapePoints
+} from "./shapes.js";
 import { playCorrect, playWrong } from "./audio.js";
 
+
+
+
+function normalizeShape(points) {
+
+  const centerX =
+    points.reduce((sum, p) => sum + p.x, 0)
+    / points.length;
+
+
+  const centerY =
+    points.reduce((sum, p) => sum + p.y, 0)
+    / points.length;
+
+
+  const xs = points.map(p => p.x);
+  const ys = points.map(p => p.y);
+
+
+  const width =
+    Math.max(...xs) - Math.min(...xs);
+
+
+  const height =
+    Math.max(...ys) - Math.min(...ys);
+
+
+
+  return points.map(p => ({
+
+    x: Number(
+      ((p.x - centerX) / width)
+        .toFixed(2)
+    ),
+
+    y: Number(
+      ((p.y - centerY) / height)
+        .toFixed(2)
+    )
+
+  }));
+
+}
+function shapesEqual(target, player) {
+
+  const n = target.length;
+
+  const tolerance = 0.25;
+
+
+  function isSamePoint(a, b) {
+
+    return (
+      Math.abs(a.x - b.x) <= tolerance &&
+      Math.abs(a.y - b.y) <= tolerance
+    );
+
+  }
+
+
+
+  // rotation check
+  for (let start = 0; start < n; start++) {
+
+    let match = true;
+
+
+    for (let i = 0; i < n; i++) {
+
+      const p =
+        player[(start + i) % n];
+
+
+      if (!isSamePoint(target[i], p)) {
+
+        match = false;
+        break;
+
+      }
+
+    }
+
+
+    if (match) return true;
+
+  }
+
+
+
+  // reverse direction check
+  for (let start = 0; start < n; start++) {
+
+    let match = true;
+
+
+    for (let i = 0; i < n; i++) {
+
+      const p =
+        player[(start - i + n) % n];
+
+
+      if (!isSamePoint(target[i], p)) {
+
+        match = false;
+        break;
+
+      }
+
+    }
+
+
+    if (match) return true;
+
+  }
+
+
+  return false;
+
+}
 function showWrongPopup() {
   playWrong();
 
@@ -63,8 +185,6 @@ function showLevelPopup(level, score) {
 
 }
 
-
-
 export const game = {
 
   score: 0,
@@ -79,7 +199,6 @@ export const game = {
 
   dots: [],
   selectedDots: [],
-  selectedPattern: [],
   lines: [],
   currentMouse: null,
   targetPoints: [],
@@ -147,10 +266,12 @@ export const game = {
       return false;
     }
 
-    const total = this.currentShape.pattern.length;
+    const total =
+      this.currentShape.geometry.length;
+
 
     if (
-      this.selectedPattern.length !== total ||
+      this.selectedDots.length !== total ||
       this.lines.length !== total
     ) {
       return false;
@@ -197,17 +318,48 @@ export const game = {
 
 
   compareShape() {
-    console.log("Target:", this.currentShape.pattern);
-    console.log("Player:", this.selectedPattern);
 
-    const target = this.currentShape.pattern;
-    const player = this.selectedPattern;
+    const player = this.selectedDots.map(dot => ({
+      x: dot.x,
+      y: dot.y
+    }));
+
+
+    const target = getShapePoints(
+      this.currentShape
+    );
+
 
     if (target.length !== player.length) {
       return false;
     }
 
-    return target.every((dotId, index) => dotId === player[index]);
+
+    const targetShape =
+      normalizeShape(target);
+
+
+    const playerShape =
+      normalizeShape(player);
+
+
+    console.log("TARGET:", targetShape);
+    console.log("PLAYER:", playerShape);
+    console.log(
+      "TARGET JSON",
+      JSON.stringify(targetShape)
+    );
+
+    console.log(
+      "PLAYER JSON",
+      JSON.stringify(playerShape)
+    );
+
+
+    return shapesEqual(
+      targetShape,
+      playerShape
+    );
 
   },
 
@@ -224,7 +376,6 @@ export const game = {
     });
 
     this.selectedDots = [];
-    this.selectedPattern = [];
 
     this.isClosed = false;
 

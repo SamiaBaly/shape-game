@@ -1,33 +1,57 @@
 export const SHAPES = [
+
   // ---------- Level 1 ----------
   {
     id: 1,
     level: 1,
     difficulty: "easy",
     name: "Triangle",
-    pattern: [10,22,26]
+    geometry: [
+      { x: 0, y: -1 },
+      { x: -1, y: 1 },
+      { x: 1, y: 1 }
+    ]
   },
+
   {
     id: 2,
     level: 1,
     difficulty: "easy",
     name: "Square",
-    pattern: [8,11,32,29]
+    geometry: [
+      { x: -1, y: -1 },
+      { x: 1, y: -1 },
+      { x: 1, y: 1 },
+      { x: -1, y: 1 }
+    ]
   },
+
   {
     id: 3,
     level: 1,
     difficulty: "easy",
     name: "Rectangle",
-    pattern: [8,12,26,22]
+    geometry: [
+      { x: -1.5, y: -1 },
+      { x: 1.5, y: -1 },
+      { x: 1.5, y: 1 },
+      { x: -1.5, y: 1 }
+    ]
   },
+
   {
     id: 4,
     level: 1,
     difficulty: "easy",
     name: "Diamond",
-    pattern: [3,19,31,15]
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 1, y: 0 },
+      { x: 0, y: 1 },
+      { x: -1, y: 0 }
+    ]
   },
+
 
   // ---------- Level 2 ----------
   {
@@ -35,29 +59,66 @@ export const SHAPES = [
     level: 2,
     difficulty: "easy",
     name: "Pentagon",
-    pattern: [3,8,23,25,12]
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 1, y: -0.3 },
+      { x: 0.6, y: 1 },
+      { x: -0.6, y: 1 },
+      { x: -1, y: -0.3 }
+    ]
   },
+
+
   {
     id: 6,
     level: 2,
     difficulty: "easy",
     name: "Hexagon",
-    pattern: [9,21,37,39,27,11]
+    geometry: [
+      { x: -0.5, y: -1 },
+      { x: 0.5, y: -1 },
+      { x: 1, y: 0 },
+      { x: 0.5, y: 1 },
+      { x: -0.5, y: 1 },
+      { x: -1, y: 0 }
+    ]
   },
+
+
   {
     id: 7,
     level: 2,
     difficulty: "easy",
     name: "Heptagon",
-    pattern: [3,8,21,37,39,27,12]
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 0.8, y: -0.5 },
+      { x: 1, y: 0.5 },
+      { x: 0.4, y: 1 },
+      { x: -0.5, y: 1 },
+      { x: -1, y: 0.2 },
+      { x: -0.8, y: -0.5 }
+    ]
   },
+
+
   {
     id: 8,
     level: 2,
     difficulty: "easy",
     name: "Octagon",
-    pattern: [2,8,22,30,32,26,12,4]
+    geometry: [
+      { x: -0.5, y: -1 },
+      { x: 0.5, y: -1 },
+      { x: 1, y: -0.5 },
+      { x: 1, y: 0.5 },
+      { x: 0.5, y: 1 },
+      { x: -0.5, y: 1 },
+      { x: -1, y: 0.5 },
+      { x: -1, y: -0.5 }
+    ]
   },
+
 
   // ---------- Level 3 ----------
   {
@@ -65,29 +126,71 @@ export const SHAPES = [
     level: 3,
     difficulty: "easy",
     name: "Arrow",
-    pattern: [14,18,10,11,19,26,32,31,25,21]
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 0.4, y: -0.3 },
+      { x: 1, y: -0.3 },
+      { x: 0.5, y: 0.3 },
+      { x: 0.8, y: 1 },
+      { x: 0, y: 0.6 },
+      { x: -0.8, y: 1 },
+      { x: -0.5, y: 0.3 },
+      { x: -1, y: -0.3 },
+      { x: -0.4, y: -0.3 }
+    ]
   },
+
+
   {
     id: 10,
     level: 3,
     difficulty: "easy",
     name: "Star",
-    pattern: [3,18,27,32,45,30,21,16]
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 0.3, y: -0.3 },
+      { x: 1, y: -0.3 },
+      { x: 0.5, y: 0.2 },
+      { x: 0.8, y: 1 },
+      { x: 0, y: 0.6 },
+      { x: -0.8, y: 1 },
+      { x: -0.5, y: 0.2 }
+    ]
   },
+
+
   {
     id: 11,
     level: 3,
     difficulty: "medium",
     name: "Heart",
-    pattern: [17,11,12,20,27,45,21,14,8,9]
+    geometry: [
+      { x: -1, y: -0.5 },
+      { x: -0.5, y: -1 },
+      { x: 0, y: -0.5 },
+      { x: 0.5, y: -1 },
+      { x: 1, y: -0.5 },
+      { x: 0.8, y: 0.4 },
+      { x: 0, y: 1 },
+      { x: -0.8, y: 0.4 }
+    ]
   },
+
+
   {
     id: 12,
     level: 3,
     difficulty: "medium",
-    name: "kite",
-    pattern: [3,15,31,39,37,19]
+    name: "Kite",
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 0.8, y: 0 },
+      { x: 0.5, y: 1 },
+      { x: -0.5, y: 1 },
+      { x: -0.8, y: 0 }
+    ]
   },
+
 
   // ---------- Level 4 ----------
   {
@@ -95,29 +198,66 @@ export const SHAPES = [
     level: 4,
     difficulty: "medium",
     name: "House",
-    pattern: [3,14,15,36,35,42,48,41,40,19,20]
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 1, y: -0.2 },
+      { x: 1, y: 1 },
+      { x: -1, y: 1 },
+      { x: -1, y: -0.2 }
+    ]
   },
+
+
   {
     id: 14,
     level: 4,
     difficulty: "medium",
     name: "Tree",
-    pattern: [3,15,16,22,23,29,30,44,46,30,32,33,25,26,18,19]
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 1, y: 0 },
+      { x: 0.5, y: 0 },
+      { x: 0.8, y: 0.5 },
+      { x: 0.3, y: 0.5 },
+      { x: 0.5, y: 1 },
+      { x: -0.5, y: 1 },
+      { x: -0.3, y: 0.5 },
+      { x: -0.8, y: 0.5 },
+      { x: -0.5, y: 0 },
+      { x: -1, y: 0 }
+    ]
   },
+
+
   {
     id: 15,
     level: 4,
     difficulty: "medium",
     name: "Rocket",
-    pattern: [16,3,18,39,47,43,37]
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 0.6, y: 0 },
+      { x: 0.8, y: 1 },
+      { x: 0, y: 0.6 },
+      { x: -0.8, y: 1 },
+      { x: -0.6, y: 0 }
+    ]
   },
+
+
   {
     id: 16,
     level: 4,
     difficulty: "medium",
     name: "Leaf",
-    pattern: [16,3,18,24,38,37,23]
-  },
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 1, y: 0 },
+      { x: 0.5, y: 1 },
+      { x: -0.5, y: 1 },
+      { x: -1, y: 0 }
+    ]
+  }
 
 ];
 
@@ -154,31 +294,17 @@ export function getRandomShape(level) {
   return shape;
 }
 
-export function getShapePoints(shape, dots) {
+export function getShapePoints(shape) {
 
-  const points = shape.pattern.map(dotId => ({
-    x: dots[dotId].x,
-    y: dots[dotId].y
-  }));
+  const size = 120; // preview shape bigger
 
-  // Bounding box
-  const minX = Math.min(...points.map(p => p.x));
-  const maxX = Math.max(...points.map(p => p.x));
-  const minY = Math.min(...points.map(p => p.y));
-  const maxY = Math.max(...points.map(p => p.y));
+  const centerX = 200;
+  const centerY = 200;
 
-  const shapeWidth = maxX - minX;
-  const shapeHeight = maxY - minY;
 
-  // 300x300 canvas এর জন্য margin
-  const scale = Math.min(
-    220 / shapeWidth,
-    220 / shapeHeight
-  );
-
-  return points.map(p => ({
-    x: (p.x - minX) * scale + (300 - shapeWidth * scale) / 2,
-    y: (p.y - minY) * scale + (300 - shapeHeight * scale) / 2
+  return shape.geometry.map(point => ({
+    x: centerX + point.x * size,
+    y: centerY + point.y * size
   }));
 
 }
