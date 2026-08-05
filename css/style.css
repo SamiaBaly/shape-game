@@ -48,26 +48,42 @@ body {
 
   overflow: hidden;
 }
+#home-btn,
+#sound-btn,
+#info-btn {
+
+  background: rgba(255, 255, 255, .12);
+
+  color: #FFFFFF;
+
+  border: 1px solid rgba(255, 255, 255, .15);
+
+}
+
+#home-btn:hover,
+#sound-btn:hover,
+#info-btn:hover {
+
+  background: #2563EB;
+
+  color: #FFFFFF;
+
+  box-shadow: 0 0 15px rgba(37, 99, 235, .6);
+
+}
 
 /* =========================
    HEADER
 ========================= */
 
 #game-header {
-
-  height: 90px;
-
-  padding: 12px 18px;
-
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
 
-  background: linear-gradient(180deg, #2F5FD6, #2953C7);
-
+  gap: 12px;
 }
+
 #game-content {
   flex: 1;
 
@@ -90,24 +106,41 @@ body {
 
 }
 
-#settings-btn {
+#home-btn {
 
-  width: 64px;
-  height: 64px;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-
-  font-size: 28px;
-
-  background: #172554;
+  width: 48px;
+  height: 48px;
 
   border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, .15);
+
+  color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  transition: .2s;
 
 }
 
-#settings-btn:hover {
+#home-btn:hover {
+
+  background: #2563EB;
+
+}
+
+#home-btn i {
+
+  font-size: 22px;
+
+}
+
+#home-btn:hover {
   background: #2563EB;
 }
 
@@ -160,6 +193,76 @@ body {
   text-transform: uppercase;
   color: #F59E0B;
   margin-bottom: 8px;
+}
+.target-header {
+
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-bottom: 8px;
+
+}
+
+#info-btn {
+
+  position: absolute;
+
+  right: 18px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, .08);
+
+  color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  transition: .2s;
+
+}
+
+#info-btn:hover {
+
+  background: #2563EB;
+
+}
+
+#info-btn i {
+
+  font-size: 22px;
+
+}
+
+
+#info-btn:hover {
+
+  background: #1D4ED8;
+
+}
+
+#game-header i,
+#info-btn i {
+
+  pointer-events: none;
+
 }
 
 #shapeCanvas {
@@ -256,26 +359,26 @@ body {
 
 .menu-btn {
 
-  width: 100%;
-  height: 60px;
+  width: 58px;
+  height: 58px;
 
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  padding: 0;
 
-  padding: 0 18px;
+  justify-content: center;
 
-  border: none;
-  border-radius: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .08);
+  
+    border: 1px solid rgba(255, 255, 255, .12);
+  
+    color: #FFFFFF;
 
-  color: #fff;
+}
 
-  font-size: 18px;
-  font-weight: 700;
+.menu-btn i {
 
-  cursor: pointer;
+  font-size: 24px;
 
-  transition: .25s;
 }
 
 .menu-btn:hover {
@@ -283,6 +386,9 @@ body {
   transform: translateX(6px);
 
   box-shadow: 0 10px 20px rgba(0, 0, 0, .25);
+  background: #2563EB;
+  
+    color: #FFFFFF;
 
 }
 
@@ -299,9 +405,7 @@ body {
 
 /* Individual Colors */
 
-#home-btn {
-  background: linear-gradient(135deg, #10B981, #059669);
-}
+
 
 #clue-btn {
   background: linear-gradient(135deg, #F59E0B, #D97706);
@@ -939,7 +1043,7 @@ body {
     padding: 8px 12px;
   }
 
-  #settings-btn {
+#home-btn {
     width: 42px;
     height: 42px;
     font-size: 20px;
@@ -949,6 +1053,7 @@ body {
     height: 42px;
     font-size: 16px;
     gap: 16px;
+    color: #E5E7EB;
   }
 
   #target-area {
@@ -993,7 +1098,7 @@ body {
 
 
 
-  #settings-btn {
+  #home-btn {
 
     width: 46px;
 
@@ -1013,6 +1118,11 @@ body {
     gap: 20px;
 
   }
+    #game-info strong {
+      color: #FFD54A;
+      /* Golden Yellow */
+      font-weight: 700;
+    }
 
 
 
@@ -1049,26 +1159,20 @@ body {
 #sound-btn {
 
   width: 48px;
+  min-width: 48px;
   height: 48px;
+  min-height: 48px;
 
-  border-radius: 50%;
+  flex-shrink: 0;
 
   border: none;
+  border-radius: 50%;
 
   background: rgba(255, 255, 255, .15);
 
-  color: white;
-
-  font-size: 24px;
-
-  cursor: pointer;
-
   display: flex;
-
   justify-content: center;
   align-items: center;
-
-  transition: .2s;
 
 }
 
@@ -1093,13 +1197,15 @@ body {
   }
 
 
-  .left-section {
+ .left-section {
+   flex: 1;
+   display: flex;
+   align-items: center;
+   gap: 18px;
 
-    width: auto;
-    flex: 1;
-    gap: 8px;
-
-  }
+   margin-right: 12px;
+   /* এইটা যোগ করো */
+ }
 
 
   #settings-btn {

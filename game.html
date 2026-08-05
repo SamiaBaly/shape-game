@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shape Game</title>
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
   <link rel="stylesheet" href="./css/style.css" />
 </head>
@@ -42,24 +44,39 @@
     <header id="game-header">
     
       <div class="left-section">
-        <button id="settings-btn">⚙️</button>
+      <button id="home-btn">
+        <i class="fa-solid fa-house"></i>
+      </button>
     
         <div id="game-info">
           <span>Score: <strong id="score">0</strong></span>
           <span>Level: <strong id="level">1</strong></span>
         </div>
       </div>
-      <button id="sound-btn">🔊</button>
+    <button id="sound-btn">
+      <i id="sound-icon" class="fa-solid fa-volume-high"></i>
+    </button>
     
     </header>
   
     <div id="game-content">
     
       <!-- Target Shape -->
-      <section id="target-area">
+    <section id="target-area">
+    
+      <div class="target-header">
+    
         <h2>Target Shape</h2>
-        <canvas id="shapeCanvas"></canvas>
-      </section>
+    
+    <button id="info-btn" type="button">
+      <i class="fa-solid fa-circle-info"></i>
+    </button>
+    
+      </div>
+    
+      <canvas id="shapeCanvas"></canvas>
+    
+    </section>
     
       <!-- Play Area -->
       <section id="play-area">
@@ -69,30 +86,22 @@
     </div>
   
     <!-- Settings -->
-    <div id="settings-menu" class="hidden">
-    
-      <button class="menu-btn" id="home-btn">
-        🏠
-        <span>Home</span>
-      </button>
-    
-      <button class="menu-btn" id="clue-btn">
-        💡
-        <span>Clue</span>
-      </button>
-    
-      <button class="menu-btn" id="retry-btn">
-        🔄
-        <span>Retry</span>
-      </button>
-    
-      <button class="menu-btn" id="share-btn">
-        📤
-        <span>Share</span>
-      </button>
-    
-    </div>
-    <!-- Level Complete Popup -->
+<div id="settings-menu" class="hidden">
+
+  <button class="menu-btn" id="undo-btn">
+    <i class="fa-solid fa-rotate-left"></i>
+  </button>
+
+  <button class="menu-btn" id="newgame-btn">
+    <i class="fa-solid fa-arrows-rotate"></i>
+  </button>
+
+  <button class="menu-btn" id="share-btn">
+    <i class="fa-solid fa-share-nodes"></i>
+  </button>
+
+</div>
+   
     <!-- Level Complete Popup -->
     <div id="level-popup" class="hidden">
     
