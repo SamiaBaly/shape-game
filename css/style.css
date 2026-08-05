@@ -1109,3 +1109,49 @@ body {
   }
 
 }
+/* FINAL RESPONSIVE FIX */
+
+@media (min-width:1200px) {
+
+  #game-container {
+    width: 420px;
+    height: 760px;
+  }
+
+
+  #game-header {
+    height: 65px;
+    padding: 10px 14px;
+  }
+
+
+  .left-section {
+    gap: 10px;
+  }
+
+
+  #settings-btn {
+    width: 46px;
+    height: 46px;
+    font-size: 22px;
+  }
+
+
+  #game-info {
+
+    height: 46px;
+    font-size: 17px;
+    gap: 20px;
+
+  }
+
+
+  #sound-btn {
+
+    width: 46px;
+    height: 46px;
+    font-size: 22px;
+
+  }
+
+}
