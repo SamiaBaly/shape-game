@@ -299,14 +299,6 @@ export function initializeCanvas() {
 
 
 function updateTargetShape(ctx, canvas) {
-  game.dots.forEach(dot => {
-    dot.clue = null;
-  });
-
-  game.currentShape.pattern.forEach((dotId, index) => {
-    game.dots[dotId].clue = index + 1;
-  });
-  redraw(gameCtx);
 
   console.log(game.currentShape.pattern);
 
@@ -315,7 +307,6 @@ function updateTargetShape(ctx, canvas) {
     game.dots
   );
 
-
   // shape center calculate
   const minX = Math.min(...points.map(p => p.x));
   const maxX = Math.max(...points.map(p => p.x));
@@ -323,28 +314,21 @@ function updateTargetShape(ctx, canvas) {
   const minY = Math.min(...points.map(p => p.y));
   const maxY = Math.max(...points.map(p => p.y));
 
-
   const shapeWidth = maxX - minX;
   const shapeHeight = maxY - minY;
 
-
-  // move to canvas center
   const offsetX =
     (canvas.width - shapeWidth) / 2 - minX;
 
   const offsetY =
     (canvas.height - shapeHeight) / 2 - minY;
 
-
-
   points = points.map(p => ({
     x: p.x + offsetX,
     y: p.y + offsetY
   }));
 
-
   game.targetPoints = points;
-
 
   drawShape(
     ctx,
