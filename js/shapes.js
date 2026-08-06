@@ -140,7 +140,6 @@ export const SHAPES = [
     ]
   },
 
-
   {
     id: 10,
     level: 3,
@@ -157,7 +156,6 @@ export const SHAPES = [
       { x: -0.5, y: 0.2 }
     ]
   },
-
 
   {
     id: 11,
@@ -176,7 +174,6 @@ export const SHAPES = [
     ]
   },
 
-
   {
     id: 12,
     level: 3,
@@ -190,7 +187,6 @@ export const SHAPES = [
       { x: -0.8, y: 0 }
     ]
   },
-
 
   // ---------- Level 4 ----------
   {
