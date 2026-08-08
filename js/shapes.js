@@ -392,6 +392,68 @@ export const SHAPES = [
       { x: -1, y: -0.5 }
     ]
   },
+  // ---------- Level 7 (Hard) ----------
+  {
+    id: 25,
+    level: 7,
+    difficulty: "hard",
+    name: "Boomerang",
+    geometry: [
+      { x: -1, y: -0.6 },
+      { x: -0.4, y: -1 },
+      { x: 0.2, y: -0.4 },
+      { x: 1, y: -0.2 },
+      { x: 0.6, y: 0.4 },
+      { x: 0, y: 0 },
+      { x: -0.4, y: 0.6 }
+    ]
+  },
+
+  {
+    id: 26,
+    level: 7,
+    difficulty: "hard",
+    name: "Fan",
+    geometry: [
+      { x: 0, y: 1 },
+      { x: -0.8, y: 0.4 },
+      { x: -1, y: -0.4 },
+      { x: -0.4, y: -1 },
+      { x: 0.4, y: -1 },
+      { x: 1, y: -0.4 },
+      { x: 0.8, y: 0.4 }
+    ]
+  },
+
+  {
+    id: 27,
+    level: 7,
+    difficulty: "hard",
+    name: "Bell",
+    geometry: [
+      { x: 0, y: -1 },
+      { x: 0.3, y: -0.8 },
+      { x: 0.3, y: 0.4 },
+      { x: 1, y: 1 },
+      { x: -1, y: 1 },
+      { x: -0.3, y: 0.4 },
+      { x: -0.3, y: -0.8 }
+    ]
+  },
+
+  {
+    id: 28,
+    level: 7,
+    difficulty: "hard",
+    name: "Envelope",
+    geometry: [
+      { x: -1, y: -0.6 },
+      { x: 1, y: -0.6 },
+      { x: 1, y: 0.6 },
+      { x: 0, y: 0 },
+      { x: -1, y: 0.6 }
+    ]
+  },
   // ---------- Level 8 (Hard) ----------
   {
     id: 29,
